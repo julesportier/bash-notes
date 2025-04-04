@@ -48,10 +48,10 @@ The general steps to parse and execute the input:
 ### Quoting ([manual 3.1.2](https://www.gnu.org/software/bash/manual/bash.html#Quoting))
 
 Quoting rules.
-- `\`: Litteral value of succeding character.
-- `''`: Litteral value of enclosed chars.
-- `""`: Only expands `$`, `` ` ` ``, (`!` outside POSIX mode). `*` and `@` have a special meaning.
-- `$''`: Only expands ANSI C escape sequences (e.g. `\n`).
+- `\` Litteral value of succeding character.
+- `''` Litteral value of enclosed chars.
+- `""` Only expands `$`, `` ` ` ``, (`!` outside POSIX mode). `*` and `@` have a special meaning.
+- `$''` Only expands ANSI C escape sequences (e.g. `\n`).
 
 ### Comments ([manual 3.1.3](https://www.gnu.org/software/bash/manual/bash.html#Comments))
 
@@ -78,9 +78,45 @@ By default the exit status is the one of the last command in the pipeline.
 Sequence of one or more pipelines separated by:
 - Lower precendence
     - `;` (sequential execution), equivalent to newline
-    - `&` (asynchronous execution), create background processes when at the end
+    - `&` (asynchronous execution), create background processes
 - Higher precedence
     - `&&` (logical and)
     - `||` (logical or)
 
 ### Compound Commands ([manual 3.2.5](https://www.gnu.org/software/bash/manual/bash.html#Compound-Commands))
+
+They are the shell programming language construct.
+Each of them begins with a reserved word or operator and end with a corresponding one.
+Any redirection associated apply to all commands within that compound command (unless overridden).
+
+#### Looping Constructs [manual 3.2.5.1](https://www.gnu.org/software/bash/manual/bash.html#Looping-Constructs)
+
+- `until` while test commands exit status != 0
+- `while` while test commands exit status == 0
+- `for` iterate a list (can be the result of an expansion, an array...)
+
+#### Conditionals Constructs [manual 3.2.5.2](https://www.gnu.org/software/bash/manual/bash.html#Conditional-Constructs)
+
+- `if`
+- `case` to have multiple patterns (cases)
+- `select` useful to generate menus
+- `((...))` arithmetic expression, expands like in double quotes (don't expands double quotes inside of it)
+- `[[...]]` enclose conditional expression, performing most of the expansions inside of it, (complex behavior, see manual).
+
+Expressions may be combined using the following operators (in order of precedence):
+`(exp)`, `! exp`, `exp1 && exp2`, `exp1 || exp2`
+
+#### Grouping Commands [manual 3.2.5.3](https://www.gnu.org/software/bash/manual/bash.html#Command-Grouping)
+
+- `( list )` executes the list of commands in a subshell
+- `{ list; }` executes the list of commands in the current shell (there is some subtelties, see manual)
+
+### Coprocesses [manual 3.2.6](https://www.gnu.org/software/bash/manual/bash.html#Coprocesses)
+
+### Gnu Parallel [manual 3.2.7](https://www.gnu.org/software/bash/manual/bash.html#GNU-Parallel)
+
+## Shell Functions [manual 3.3](https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions)
+
+## Shell Parameters [manual 3.4](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameters)
+
+
