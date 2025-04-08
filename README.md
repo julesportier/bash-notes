@@ -116,11 +116,88 @@ Expressions may be combined using the following operators (in order of precedenc
 - `{ list; }` executes the list of commands in the current shell (there is some subtelties, see manual)
 
 ### Coprocesses [manual 3.2.6](https://www.gnu.org/software/bash/manual/bash.html#Coprocesses)
-
+TODO
 ### Gnu Parallel [manual 3.2.7](https://www.gnu.org/software/bash/manual/bash.html#GNU-Parallel)
-
+TODO
 ## Shell Functions [manual 3.3](https://www.gnu.org/software/bash/manual/bash.html#Shell-Functions)
-
+TODO
 ## Shell Parameters [manual 3.4](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameters)
 
+A parameter is an entity that stores values in the form `name=[value]`, if *value* is not given the variable is assigned the null string.
+All values undergo tilde expansion, parameter and variable expansion, command substitution, arithmetic expansion and quote removal.
+(look for manual, it's only very superficial notes)
+
+### Positional Parameters [manual 3.4.1](https://www.gnu.org/software/bash/manual/bash.html#Positional-Parameters)
+
+They allow to access arguments, syntax for argument N is `${N}`.
+
+### Special Parameters [manual 3.4.2](https://www.gnu.org/software/bash/manual/bash.html#Special-Parameters)
+
+- `$*` & `$@` expands positional parameters
+- `$#` expands to the number of positional parameters
+- `$?` expands to the exit status of the most recently executed foreground pipeline
+- `$-` expands to the current option flag
+- `$$` expands to the process id of the shell
+- `$!` expands to the process id of the job most recently placed into the background
+- `$0` expands to the name of the shell or shell script
+
+## Shell Expansions [manual 3.5](https://www.gnu.org/software/bash/manual/bash.html#Shell-Expansions)
+
+Expansion is performed on the command line after it has been split to tokens.
+The seven expansions are performed in order :
+- [brace expansion](#markdown-header-Brace-Expansion) (can increase the number of words)
+- [tilde expansion](#markdown-header-Tilde-Expansion)
+- [parameter](#markdown-header-Shell-Parameter-Expansion) and variable expansion (only `$@`, `$*` and `${name[@]}`, `${name[*]}` can increase the number of words)
+- [arithmetic expansion](#header-markdown-Arithmetic-Expansion)
+- [command substitution](#markdown-header-Command-Substitution)
+- word splitting (can increase the number of words)
+- filename expansion (can increase the number of words)
+After that [quote removal](#markdown-header-Quote-Removal) is performed.
+
+### Brace Expansion [manual 3.5.1](https://www.gnu.org/software/bash/manual/bash.html#Brace-Expansion)
+
+Brace expansion permits to generate arbitrary strings.
+e.g. `mkdir /home/{john,alice}` create two directories: `/home/alice` and `/home/john`.
+The `${...}` isn't eligible for brace expansion.
+
+### Tilde Expansion [manual 3.5.2](https://www.gnu.org/software/bash/manual/bash.html#Tilde-Expansion)
+
+- `~` expands to `$HOME`
+- `~user` expands to user's hoem directory
+- `~+` expands to `$PWD`
+- `~-` expands to `$OLDPWD`
+- `~N` expands to `dirs +N`
+
+### Shell Parameter Expansion [manual 3.5.3](https://www.gnu.org/software/bash/manual/bash.html#Shell-Parameter-Expansion)
+
+Performs parameter expansion, transform parameters according to rules.
+e.g.
+``` bash
+var=
+echo ${var-is_not_set}
+is_not_set
+```
+(see manual for details, there is a lot of different possibilities)
+
+### Command Substitution [manual 3.5.4](https://www.gnu.org/software/bash/manual/bash.html#Command-Substitution)
+
+returns the output of *command* as a string.
+`$(command)` or `` `command` `` (this one performs escaping for `\$`, `` \` ``, `\\`)
+
+### Arithmetic expansion [manual 3.5.5](https://www.gnu.org/software/bash/manual/bash.html#Arithmetic-Expansion)
+
+Allow to evaluate arithmetic expression `$(( expression ))`.
+Same expansion as double quotes (double quotes in expression are just removed).
+
+### Process Substitution [manual 3.5.6](https://www.gnu.org/software/bash/manual/bash.html#Process-Substitution)
+
+It allows to treat the process input/output as a filename. The process is run asynchronously.
+- `cmd <(list)` redirect list output to cmd input
+- `>(list)` output
+
+### Word Splitting [manual 3.5.7](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting)
+
+### Filename Expansion [manual 3.5.8](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)
+
+### Quote Removal [manual 3.5.9](https://www.gnu.org/software/bash/manual/bash.html#Quote-Removal)
 
