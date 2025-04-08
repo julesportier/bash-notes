@@ -1,3 +1,7 @@
+# Ressources
+
+- [nixcraft bash wiki](https://bash.cyberciti.biz/guide/Main_Page)
+
 # Introduction ([manual 1](https://www.gnu.org/software/bash/manual/bash.html#Introduction))
 
 - A shell is basically **a macro processor that executes commands**.
