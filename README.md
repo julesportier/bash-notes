@@ -80,10 +80,10 @@ By default the exit status is the one of the last command in the pipeline.
 ### List of Commands ([manual 3.2.4](https://www.gnu.org/software/bash/manual/bash.html#Lists))
 
 Sequence of one or more pipelines separated by:
-- Lower precendence
+- Lower precendence (equal precedence between the two)
     - `;` (sequential execution), equivalent to newline
     - `&` (asynchronous execution), create background processes
-- Higher precedence
+- Higher precedence (equal precedence between the two)
     - `&&` (logical and)
     - `||` (logical or)
 
@@ -150,7 +150,7 @@ The seven expansions are performed in order :
 - [parameter](#markdown-header-Shell-Parameter-Expansion) and variable expansion (only `$@`, `$*` and `${name[@]}`, `${name[*]}` can increase the number of words)
 - [arithmetic expansion](#header-markdown-Arithmetic-Expansion)
 - [command substitution](#markdown-header-Command-Substitution)
-- word splitting (can increase the number of words)
+- [word splitting](#markdown-header-Word-Splitting) (can increase the number of words)
 - filename expansion (can increase the number of words)
 After that [quote removal](#markdown-header-Quote-Removal) is performed.
 
@@ -197,7 +197,12 @@ It allows to treat the process input/output as a filename. The process is run as
 
 ### Word Splitting [manual 3.5.7](https://www.gnu.org/software/bash/manual/bash.html#Word-Splitting)
 
+Outside of doubles quotes the shell splits (with $IFS as delimiter, default <space><tab><newline>) the result of parameter expansion, command substitution, and arithmetic expansion.
+Explicit null arguments ("" or '') are passed as empty strings. Unquoted implicit null arguments, resulting from expansion of parameters without values are removed.
+
 ### Filename Expansion [manual 3.5.8](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)
+
+// After word splitting bash scans
 
 ### Quote Removal [manual 3.5.9](https://www.gnu.org/software/bash/manual/bash.html#Quote-Removal)
 
