@@ -202,7 +202,9 @@ Explicit null arguments ("" or '') are passed as empty strings. Unquoted implici
 
 ### Filename Expansion [manual 3.5.8](https://www.gnu.org/software/bash/manual/bash.html#Filename-Expansion)
 
-// After word splitting bash scans
+After word splitting bash scans each word for unquoted characters `*`, `?` and `[`. It treat them as a pattern and replace them with alphabetically sorted lists of files.
+If the filename begins by a `.` (or `..`) the dot must be matched explicitely -> eg. `.*`.
 
 ### Quote Removal [manual 3.5.9](https://www.gnu.org/software/bash/manual/bash.html#Quote-Removal)
 
+After the preceding expansions all unquoted occurences of the characters `\`, `'`, and `"` that did not result from one of the above expansions are removed.
